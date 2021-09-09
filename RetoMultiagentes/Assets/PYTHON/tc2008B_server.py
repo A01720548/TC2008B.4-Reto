@@ -13,7 +13,7 @@ import retotest
 # Size of the board:
 width = 14
 height = 14
-maxCars = 6
+maxCars = 8
 
 model = retotest.IntersectionModel(width, height, maxCars)
 
@@ -32,6 +32,7 @@ def positionsToJSON(ps):
             "x": p[0],
             "y": .05,
             "z": p[1]
+            # "height": p[2]
         }
         print(pos)
         posDICT.append(pos)

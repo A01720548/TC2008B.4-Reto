@@ -16,9 +16,13 @@ public class AgentControllerNEW : MonoBehaviour
     public GameObject uc;
     public GameObject car1;
     public GameObject car2;
+    public GameObject car3;
+    public GameObject car4;
 
     public int clonesOfAgent1;
     public int clonesOfAgent2;
+    public int clonesOfAgent3;
+    public int clonesOfAgent4;
 
     GameObject[] agents;
     public float timeToUpdate = 5.0f;
@@ -52,6 +56,7 @@ public class AgentControllerNEW : MonoBehaviour
                 //Data tPos = JsonUtility.FromJson<Data>(www.downloadHandler.text.Replace('\'', '\"'));
                 //Debug.Log(tPos);
                 List<Vector3> newPositions = new List<Vector3>();
+                List<int> newHeights = new List<int>();
                 string txt = www.downloadHandler.text.Replace('\'', '\"');
                 txt = txt.TrimStart('"', '{', 'd', 'a', 't', 'a', ':', '[');
                 txt = "{\"" + txt;
@@ -68,6 +73,8 @@ public class AgentControllerNEW : MonoBehaviour
                     Vector3 test = JsonUtility.FromJson<Vector3>(strs[i]);
                     newPositions.Add(test);
                 }
+                int height = JsonUtility.FromJson<int>(strs[3]);
+                newHeights.Add(height);
 
                 List<Vector3> poss = new List<Vector3>();
                 for (int s = 0; s < agents.Length; s++)
@@ -84,18 +91,47 @@ public class AgentControllerNEW : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int numOfAgents = clonesOfAgent1 + clonesOfAgent2 + 5;
-        agents = new GameObject[numOfAgents];
+        int numOfAgents = clonesOfAgent1 + clonesOfAgent2 + clonesOfAgent3 + clonesOfAgent4;
+        agents = new GameObject[numOfAgents + 5];
+        int index = 0;
         // Lights
-        for (int i = 0; i < numOfAgents; i++)
+        for (int i = 0; i < 4; i++)
         {
-            agents[i] = Instantiate(light, Vector3.zero, Quaternion.identity);
+            agents[index] = Instantiate(light, Vector3.zero, Quaternion.identity);
+            index++;
 
         }
         // UC
-        // agents[5] = Instantiate(uc, Vector3.zero, Quaternion.identity);
+        agents[index] = Instantiate(uc, Vector3.zero, Quaternion.identity);
+        index++;
 
-        // for (int i = 0; i < numOfAgents)
+        for (int i = 0; i < clonesOfAgent1; i++)
+        {
+            agents[index] = Instantiate(car1, Vector3.zero, Quaternion.identity);
+            index++;
+
+
+        }
+        for (int i = 0; i < clonesOfAgent2; i++)
+        {
+            agents[index] = Instantiate(car2, Vector3.zero, Quaternion.identity);
+            index++;
+
+
+        }
+        for (int i = 0; i < clonesOfAgent3; i++)
+        {
+            agents[index] = Instantiate(car3, Vector3.zero, Quaternion.identity);
+            index++;
+
+
+        }
+        for (int i = 0; i < clonesOfAgent4; i++)
+        {
+            agents[index] = Instantiate(car4, Vector3.zero, Quaternion.identity);
+            index++;
+
+        }
 
 
         positions = new List<List<Vector3>>();

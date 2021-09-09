@@ -440,9 +440,9 @@ class IntersectionModel(Model):
         self.datacollector = DataCollector(
             model_reporters={"Grid": get_grid},
             agent_reporters={
-                # "height": "height",
                 "X": lambda a: a.pos[0],
                 "Y": lambda a: a.pos[1]
+                # "height": "height"
             }
         )
 

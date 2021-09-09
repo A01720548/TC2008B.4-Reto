@@ -300,8 +300,12 @@ MonoBehaviour:
   uc: {fileID: 6906548232385264367, guid: f43566426d505c341a31102739bdf131, type: 3}
   car1: {fileID: 2237747219321748424, guid: bb34526823e1866499dc9c7805a4cce4, type: 3}
   car2: {fileID: 7403298294070793345, guid: c742038604a78af438fdc44ccbadcf1d, type: 3}
-  clonesOfAgent1: 6
-  clonesOfAgent2: 0
+  car3: {fileID: 8698747729729293276, guid: 42a5dadaf3679d146af5367ae25af62f, type: 3}
+  car4: {fileID: 3249233896462053654, guid: 99bce3f26ce0af74ea6b560203f346ef, type: 3}
+  clonesOfAgent1: 2
+  clonesOfAgent2: 2
+  clonesOfAgent3: 2
+  clonesOfAgent4: 2
   timeToUpdate: 0.5
 --- !u!4 &2055981450
 Transform:
