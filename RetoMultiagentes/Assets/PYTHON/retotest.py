@@ -18,6 +18,8 @@ Original file is located at
 """
 
 
+# mathplotlib lo usamos para graficar/visualizar como evoluciona el autómata celular.
+# %matplotlib inline
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 import matplotlib
@@ -27,9 +29,6 @@ from mesa import Agent, Model
 from mesa.space import MultiGrid
 from mesa.time import SimultaneousActivation
 from mesa.datacollection import DataCollector
-
-# mathplotlib lo usamos para graficar/visualizar como evoluciona el autómata celular.
-# %matplotlib inline
 plt.rcParams["animation.html"] = "jshtml"
 matplotlib.rcParams['animation.embed_limit'] = 2**128
 
@@ -217,50 +216,50 @@ class Car(Agent):
         randomList = np.random.randint(1, 4)
         newDirection = ''
         newList = []
-        randomPos = np.random.randint(0,1)
+        randomPos = np.random.randint(0, 1)
         newVuelta = 0
         if randomList == 1:
-          newDirection = 'A'
-          newList = CarsA
-          newPos = newList[randomPos]
-          if (newPos[0] == 7):
-            newVuelta = np.random.choice([0, 1])
-          elif (newPos[0] == 8):
-            newVuelta = np.random.choice([1, 2])
+            newDirection = 'A'
+            newList = CarsA
+            newPos = newList[randomPos]
+            if (newPos[0] == 7):
+                newVuelta = np.random.choice([0, 1])
+            elif (newPos[0] == 8):
+                newVuelta = np.random.choice([1, 2])
         if randomList == 2:
-          newDirection = 'B'
-          newList = CarsB
-          newPos = newList[randomPos]
-          if (newPos[1] == 7):
-            newVuelta = np.random.choice([0, 1])
-          elif (newPos[1] == 8):
-            newVuelta = np.random.choice([1, 2])
+            newDirection = 'B'
+            newList = CarsB
+            newPos = newList[randomPos]
+            if (newPos[1] == 7):
+                newVuelta = np.random.choice([0, 1])
+            elif (newPos[1] == 8):
+                newVuelta = np.random.choice([1, 2])
         if randomList == 3:
-          newDirection = 'C'
-          newList = CarsC
-          newPos = newList[randomPos]
-          if (newPos[0] == 6):
-            newVuelta = np.random.choice([0, 1])
-          elif (newPos[0] == 5):
-            newVuelta = np.random.choice([1, 2])
+            newDirection = 'C'
+            newList = CarsC
+            newPos = newList[randomPos]
+            if (newPos[0] == 6):
+                newVuelta = np.random.choice([0, 1])
+            elif (newPos[0] == 5):
+                newVuelta = np.random.choice([1, 2])
         if randomList == 4:
-          newDirection = 'D'
-          newList = CarsD
-          newPos = newList[randomPos]
-          if (newPos[1] == 6):
-            newVuelta = np.random.choice([0, 1])
-          elif (newPos[1] == 5):
-            newVuelta = np.random.choice([1, 2])
-        
+            newDirection = 'D'
+            newList = CarsD
+            newPos = newList[randomPos]
+            if (newPos[1] == 6):
+                newVuelta = np.random.choice([0, 1])
+            elif (newPos[1] == 5):
+                newVuelta = np.random.choice([1, 2])
+
         x, y = pos
         xNext, yNext = posNext
         if self.model.grid.out_of_bounds(posNext):
-          self.model.grid.move_agent(self, (newPos))
-          self.direction = newDirection
-          self.is_moving = True
-          self.once_light = False
-          self.vuelta = newVuelta
-          return False
+            self.model.grid.move_agent(self, (newPos))
+            self.direction = newDirection
+            self.is_moving = True
+            self.once_light = False
+            self.vuelta = newVuelta
+            return False
         # if (x == 0 and xNext == -1):
         #     self.model.grid.move_agent(self, (newPos))
         #     self.direction = newDirection
@@ -429,7 +428,7 @@ class IntersectionModel(Model):
             self.grid.place_agent(l, Lights[z])
             self.schedule.add(l)
 
-        Aquí definimos con colector para obtener el grid completo.
+        # Aquí definimos con colector para obtener el grid completo.
         # self.datacollector = DataCollector(
         #     agent_reporters={
         #         "height": "height",
@@ -441,12 +440,11 @@ class IntersectionModel(Model):
         self.datacollector = DataCollector(
             model_reporters={"Grid": get_grid},
             agent_reporters={
-                "height": "height",
+                # "height": "height",
                 "X": lambda a: a.pos[0],
                 "Y": lambda a: a.pos[1]
             }
         )
-
 
         # self.datacollector = DataCollector(model_reporters={"Grid": get_grid})
 
@@ -458,8 +456,6 @@ class IntersectionModel(Model):
         for i in range(self.maxCars):
             print('placeCar')
             self.agentPlacer()
-
-        
 
     def resetGlobalVariables(self):
         global Lights, light_state, carCounter, CarsA, CarsB, CarsC, CarsD, gen, carsDone
@@ -526,18 +522,18 @@ class IntersectionModel(Model):
         self.schedule.add(c)
 
     def agentPlacer(self):
-      print('ran agent placer')
-      # Cars
-      global CarsA, CarsB, CarsC, CarsD
-      randomList = np.random.randint(1, 4)
-      if randomList == 1:
-          self.placeCarA()
-      if randomList == 2:
-          self.placeCarB()
-      if randomList == 3:
-          self.placeCarC()
-      if randomList == 4:
-          self.placeCarD()
+        print('ran agent placer')
+        # Cars
+        global CarsA, CarsB, CarsC, CarsD
+        randomList = np.random.randint(1, 4)
+        if randomList == 1:
+            self.placeCarA()
+        if randomList == 2:
+            self.placeCarB()
+        if randomList == 3:
+            self.placeCarC()
+        if randomList == 4:
+            self.placeCarD()
 
     def allCarsDone(self):
         global carsDone
@@ -547,12 +543,14 @@ class IntersectionModel(Model):
 
     def getPosition(self):
         all_grid = self.datacollector.get_agent_vars_dataframe()
-        posList = all_grid.values.tolist()
+        tail = all_grid.tail(self.maxCars + 5)
+
+        posList = tail.values.tolist()
         return posList
 
     def step(self):
-      self.datacollector.collect(self)
-      self.schedule.step()
+        self.datacollector.collect(self)
+        self.schedule.step()
 
 
 # # Max RunTime
@@ -566,12 +564,13 @@ class IntersectionModel(Model):
 # while (i >= 0):
 #     frameCounter += 1
 #     model.step()
+#     print(model.getPosition())
 #     i -= 1
 
-# # all_grid = model.datacollector.get_agent_vars_dataframe()
+# all_grid = model.datacollector.get_agent_vars_dataframe()
 # # print(all_grid.values.tolist()[0][1])
 # all_grid = model.datacollector.get_model_vars_dataframe()
-# print(all_grid)
+
 
 # # % % capture
 

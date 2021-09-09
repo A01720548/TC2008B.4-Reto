@@ -8,14 +8,14 @@ import json
 
 import numpy as np
 
-import reto
+import retotest
 
 # Size of the board:
 width = 14
 height = 14
-maxCars = 1
+maxCars = 6
 
-model = reto.IntersectionModel(width, height, 10)
+model = retotest.IntersectionModel(width, height, maxCars)
 
 
 def updatePositions():
@@ -28,10 +28,10 @@ def positionsToJSON(ps):
     posDICT = []
     for p in ps:
         pos = {
-            "height": p[0],
-            "x": p[1],
-            "z": p[2],
-            "y": .05
+            # "height": p[0],
+            "x": p[0],
+            "y": .05,
+            "z": p[1]
         }
         print(pos)
         posDICT.append(pos)

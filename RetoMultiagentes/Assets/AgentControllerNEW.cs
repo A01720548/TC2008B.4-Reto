@@ -40,7 +40,7 @@ public class AgentControllerNEW : MonoBehaviour
             www.SetRequestHeader("Content-Type", "application/json");
 
             yield return www.SendWebRequest();          // Talk to Python
-            if ((www.result == UnityWebRequest.Result.ConnectionError) || 
+            if ((www.result == UnityWebRequest.Result.ConnectionError) ||
                 (www.result == UnityWebRequest.Result.ProtocolError))
             {
                 Debug.Log(www.error);
@@ -58,7 +58,7 @@ public class AgentControllerNEW : MonoBehaviour
                 txt = txt.TrimEnd(']', '}');
                 txt = txt + '}';
                 string[] strs = txt.Split(new string[] { "}, {" }, StringSplitOptions.None);
-                Debug.Log("strs.Length:"+strs.Length);
+                Debug.Log("strs.Length:" + strs.Length);
                 for (int i = 0; i < strs.Length; i++)
                 {
                     strs[i] = strs[i].Trim();
@@ -70,7 +70,7 @@ public class AgentControllerNEW : MonoBehaviour
                 }
 
                 List<Vector3> poss = new List<Vector3>();
-                for(int s = 0; s < agents.Length; s++)
+                for (int s = 0; s < agents.Length; s++)
                 {
                     //spheres[s].transform.localPosition = newPositions[s];
                     poss.Add(newPositions[s]);
@@ -87,15 +87,15 @@ public class AgentControllerNEW : MonoBehaviour
         int numOfAgents = clonesOfAgent1 + clonesOfAgent2 + 5;
         agents = new GameObject[numOfAgents];
         // Lights
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < numOfAgents; i++)
         {
             agents[i] = Instantiate(light, Vector3.zero, Quaternion.identity);
 
         }
         // UC
-        agents[5] = Instantiate(uc, Vector3.zero, Quaternion.identity);
+        // agents[5] = Instantiate(uc, Vector3.zero, Quaternion.identity);
 
-        for (int i = 0; i < numOfAgents)
+        // for (int i = 0; i < numOfAgents)
 
 
         positions = new List<List<Vector3>>();
@@ -120,7 +120,7 @@ public class AgentControllerNEW : MonoBehaviour
         timer -= Time.deltaTime;
         dt = 1.0f - (timer / timeToUpdate);
 
-        if(timer < 0)
+        if (timer < 0)
         {
 #if UNITY_EDITOR
             timer = timeToUpdate; // reset the timer
