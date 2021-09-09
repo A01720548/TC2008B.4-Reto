@@ -193,9 +193,9 @@ class Light(Agent):
 
 
 class Car(Agent):
-    def __init__(self, unique_id, model, direction, vuelta, height):
+    def __init__(self, unique_id, model, direction, vuelta):
         super().__init__(unique_id, model)
-        self.height = height
+        self.height = .05
         self.vuelta = vuelta  # 0 = izquierda, 1=recto, 2=derecha
         self.is_moving = True
         self.direction = direction
@@ -441,8 +441,8 @@ class IntersectionModel(Model):
             model_reporters={"Grid": get_grid},
             agent_reporters={
                 "X": lambda a: a.pos[0],
-                "Y": lambda a: a.pos[1]
-                # "height": "height"
+                "Y": "height",
+                "Z": lambda a: a.pos[1]
             }
         )
 
@@ -478,7 +478,7 @@ class IntersectionModel(Model):
             vuelta = np.random.choice([0, 1])
         elif (x == 8):
             vuelta = np.random.choice([1, 2])
-        c = Car((CarsA[z], gen), self, 'A', vuelta, 2)
+        c = Car((CarsA[z], gen), self, 'A', vuelta)
         self.grid.place_agent(c, CarsA[z])
         self.schedule.add(c)
 
@@ -491,7 +491,7 @@ class IntersectionModel(Model):
             vuelta = np.random.choice([0, 1])
         elif (y == 8):
             vuelta = np.random.choice([1, 2])
-        c = Car((CarsB[z], gen), self, 'B', vuelta, 3)
+        c = Car((CarsB[z], gen), self, 'B', vuelta)
         self.grid.place_agent(c, CarsB[z])
         self.schedule.add(c)
 
@@ -504,7 +504,7 @@ class IntersectionModel(Model):
             vuelta = np.random.choice([0, 1])
         elif (x == 5):
             vuelta = np.random.choice([1, 2])
-        c = Car((CarsC[z], gen), self, 'C', vuelta, 4)
+        c = Car((CarsC[z], gen), self, 'C', vuelta)
         self.grid.place_agent(c, CarsC[z])
         self.schedule.add(c)
 
@@ -517,7 +517,7 @@ class IntersectionModel(Model):
             vuelta = np.random.choice([0, 1])
         elif (y == 5):
             vuelta = np.random.choice([1, 2])
-        c = Car((CarsD[z], gen), self, 'D', vuelta, 5)
+        c = Car((CarsD[z], gen), self, 'D', vuelta)
         self.grid.place_agent(c, CarsD[z])
         self.schedule.add(c)
 
@@ -553,19 +553,19 @@ class IntersectionModel(Model):
         self.schedule.step()
 
 
-# # Max RunTime
-# # Amount of Cars
-# maxCars = 5
+# Max RunTime
+# Amount of Cars
+maxCars = 5
 
-# frameCounter = 0
-# i = 100
+frameCounter = 0
+i = 100
 
-# model = IntersectionModel(14, 14, maxCars)
-# while (i >= 0):
-#     frameCounter += 1
-#     model.step()
-#     print(model.getPosition())
-#     i -= 1
+model = IntersectionModel(14, 14, maxCars)
+while (i >= 0):
+    frameCounter += 1
+    model.step()
+    print(model.getPosition())
+    i -= 1
 
 # all_grid = model.datacollector.get_agent_vars_dataframe()
 # # print(all_grid.values.tolist()[0][1])

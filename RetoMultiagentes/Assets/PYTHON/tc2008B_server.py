@@ -28,11 +28,9 @@ def positionsToJSON(ps):
     posDICT = []
     for p in ps:
         pos = {
-            # "height": p[0],
             "x": p[0],
-            "y": .05,
-            "z": p[1]
-            # "height": p[2]
+            "y": p[1],
+            "z": p[2]
         }
         print(pos)
         posDICT.append(pos)
