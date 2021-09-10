@@ -4,29 +4,22 @@ using UnityEngine;
 
 public class hideCars : MonoBehaviour
 {
-    public bool visible;
+    bool visible = true;
+    public GameObject child1;
     void start()
     {
-        visible = true;
+        child1 = this.gameObject.transform.GetChild(0).gameObject;
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
-        if (visible == true)
+        if (col.tag == "appear")
         {
-            if (col.gameObject.tag == "car")
-            {
-                col.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                visible = false;
-            }
+            child1.SetActive(true);
         }
-        else
+        if (col.tag == "dis")
         {
-            if (col.gameObject.tag == "car")
-            {
-                col.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                visible = true;
-            }
+            child1.SetActive(false);
         }
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - hitbox
   - car
+  - appear
+  - dis
   layers:
   - Default
   - TransparentFX
